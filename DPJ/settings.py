@@ -1,5 +1,5 @@
 # Django settings for DPJ project.
-
+import mongoengine
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,7 +11,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': '', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
@@ -20,6 +20,11 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default.
     }
 }
+from mongoengine import connect
+connect('employeedb', username='', password='')
+
+SESSION_ENGINE = 'mongoengine.django.sessions'
+SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -120,6 +125,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'DJ',
+    'django.contrib.admin'
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
